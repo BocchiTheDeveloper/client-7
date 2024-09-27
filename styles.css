@@ -118,8 +118,252 @@ button:hover {
     background-color: #d4d4d4;
 }
 
-#personality-test, #segment-wheel, #story-of-my-life {
-    width: 15%;
+#personality-test, #segment-wheel, #story-of-my-life, #ingredients-for-success, #power-triad {
+    width: 20%;
+}
+
+/* Fade-in and fade-out animations */
+@keyframes fadeInRight {
+    0% {
+        opacity: 0;
+        transform: translateX(100px);
+    }
+    100% {
+        opacity: 1;
+        transform: translateX(0);
+    }
+}
+
+@keyframes fadeInLeft {
+    0% {
+        opacity: 0;
+        transform: translateX(-100px);
+    }
+    100% {
+        opacity: 1;
+        transform: translateX(0);
+    }
+}
+
+@keyframes fadeOut {
+    0% {
+        opacity: 1;
+    }
+    100% {
+        opacity: 0;
+    }
+}
+
+/* Ensure sections have correct z-index */
+.overlay-section {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: 80%;
+    padding: 50px;
+    text-align: center;
+    background: rgba(255, 255, 255, 0.1);
+    backdrop-filter: blur(10px);
+    border-radius: 15px;
+    color: white;
+    opacity: 0;
+    visibility: hidden;
+    z-index: 0; /* Set it behind the container initially */
+    transition: opacity 1s ease, visibility 0s 1s;
+}
+
+.overlay-section img, .overlay-section video {
+    width: 100%;
+    max-width: 600px; /* Adjust this value as needed */
+    height: auto; /* This ensures the aspect ratio is maintained */
+    margin-bottom: 20px;
+    border-radius: 10px; /* Optional: adds rounded corners */
+    box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.3); /* Optional: adds a subtle shadow */
+}
+
+@media (max-width: 768px) {
+    .overlay-section img, .overlay-section video {
+        max-width: 100%; /* Ensures the media doesn't exceed the screen width on smaller devices */
+    }
+}
+
+
+/* When active, bring the section to front */
+.overlay-section.active {
+    opacity: 1;
+    visibility: visible;
+    z-index: 2; /* Make sure it’s above other content */
+    transition: opacity 1s ease, visibility 0s 0s; /* Visibility is immediate */
+}
+
+/* Keep the container under the overlay section when it's visible */
+.container {
+    z-index: 1; /* Keeps the container below when section is active */
+}
+
+
+.overlay-section h1 {
+    margin-bottom: 20px;
+}
+
+.overlay-section img {
+    width: 100%;
+    max-width: 300px;
+    margin-bottom: 20px;
+}
+
+.overlay-section p {
+    margin-bottom: 30px;
+}
+
+.left-btn, .right-btn {
+    padding: 10px 20px;
+    margin: 10px;
+    font-size: 1.2rem;
+    background-color: #f0f0f0;
+    border: none;
+    border-radius: 15px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+
+.left-btn:hover, .right-btn:hover {
+    background-color: #d4d4d4;
+}
+
+.left-btn {
+    position: absolute;
+    left: 20px;
+    bottom: 20px;
+}
+
+.right-btn {
+    position: absolute;
+    right: 20px;
+    bottom: 20px;
+}* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body, html {
+    height: 100%;
+    font-family: Arial, sans-serif;
+    overflow: hidden;
+}
+
+body {
+    background: url('images/f1.jpg') no-repeat center center/cover;
+    position: relative;
+}
+
+body::before {
+    content: "";
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.129); /* Darkens the background image */
+}
+
+/* Top-right navigation links */
+.top-right-links {
+    position: absolute;
+    top: 20px;
+    right: 20px;
+    z-index: 2;
+    display: flex;
+    gap: 35px;
+}
+
+.top-right-links a {
+    color: white;
+    font-size: 1.2rem;
+    opacity: 0;
+    animation: fadeInLeft 1.5s ease forwards;
+}
+
+.top-right-links a:nth-child(1) {
+    animation-delay: 0.5s;
+}
+
+.top-right-links a:nth-child(2) {
+    animation-delay: 0.7s;
+}
+
+/* Table of Contents Overlay styles */
+#table-of-contents ul {
+    list-style: none;
+    padding: 0;
+}
+
+#table-of-contents ul li {
+    margin-bottom: 15px;
+}
+
+#table-of-contents ul li a {
+    font-size: 1.5rem;
+    color: white;
+    text-decoration: none;
+}
+
+#table-of-contents ul li a:hover {
+    text-decoration: underline;
+}
+
+/* Container styles */
+.container {
+    position: relative;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: flex-start; /* Moves content to the left */
+    padding-left: 50px;
+    color: white;
+    z-index: 1;
+}
+
+h1, p#name, button {
+    opacity: 0;
+    transform: translateX(100px); /* Start from the right */
+    animation: fadeInRight 1.5s ease forwards;
+}
+
+h1 {
+    font-size: 3rem;
+    margin-bottom: 20px;
+    animation-delay: 0.3s;
+}
+
+h1#name {
+    font-size: 1.2rem;
+    position: absolute;
+    bottom: 50px;
+    animation-delay: 0.7s;
+}
+
+button {
+    margin-top: 20px;
+    padding: 10px 20px;
+    font-size: 1.2rem;
+    background-color: #f0f0f0;
+    border-radius: 15px;
+    border: none;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+    animation-delay: 0.5s;
+}
+
+button:hover {
+    background-color: #d4d4d4;
+}
+
+#personality-test, #segment-wheel, #story-of-my-life, #ingredients-for-success, #power-triad {
+    width: 20%;
 }
 
 /* Fade-in and fade-out animations */
